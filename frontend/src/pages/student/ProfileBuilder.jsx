@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { UploadCloud, CheckCircle } from 'lucide-react';
+import ResumeGenerator from '../../components/ResumeGenerator';
 
 const ProfileBuilder = () => {
   const [profile, setProfile] = useState({
@@ -128,10 +129,11 @@ const ProfileBuilder = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 pt-4 border-t border-border">
             <button type="submit" disabled={loading} className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-medium hover:bg-primary/90 transition-colors disabled:opacity-50">
               {loading ? 'Saving...' : 'Save Profile'}
             </button>
+            <ResumeGenerator profile={profile} />
             {success && <div className="flex items-center gap-2 text-green-600 text-sm font-medium"><CheckCircle className="w-4 h-4"/> Saved Successfully</div>}
           </div>
         </form>

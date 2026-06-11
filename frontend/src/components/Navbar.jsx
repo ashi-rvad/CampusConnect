@@ -29,8 +29,14 @@ const Navbar = () => {
                   <Link to="/profile" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                     My Profile
                   </Link>
+                  <Link to="/companies" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                    Companies
+                  </Link>
                 </>
               )}
+              <Link to="/events" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                Events
+              </Link>
               <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                 Dashboard
               </Link>

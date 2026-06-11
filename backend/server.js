@@ -36,6 +36,8 @@ import studentRouter from './routes/student.routes.js';
 import companyRouter from './routes/company.routes.js';
 import jobRouter from './routes/job.routes.js';
 import applicationRouter from './routes/application.routes.js';
+import eventRouter from './routes/event.routes.js';
+import reviewRouter from './routes/review.routes.js';
 
 // Routes Declaration
 app.use('/api/auth', authRouter);
@@ -43,6 +45,8 @@ app.use('/api/students', studentRouter);
 app.use('/api/companies', companyRouter);
 app.use('/api/jobs', jobRouter);
 app.use('/api/applications', applicationRouter);
+app.use('/api/events', eventRouter);
+app.use('/api/reviews', reviewRouter);
 
 app.get('/', (req, res) => {
     res.send('API is running...');

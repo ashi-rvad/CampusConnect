@@ -6,6 +6,8 @@ import Register from './pages/auth/Register';
 import Dashboard from './pages/Dashboard';
 import Jobs from './pages/student/Jobs';
 import ProfileBuilder from './pages/student/ProfileBuilder';
+import EventsBoard from './pages/events/EventsBoard';
+import Companies from './pages/student/Companies';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import socket from './services/socket';
@@ -34,6 +36,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/profile" element={<ProfileBuilder />} />
+          <Route path="/events" element={<EventsBoard />} />
+          <Route path="/companies" element={<Companies />} />
         </Routes>
       </main>
     </div>
