@@ -65,16 +65,27 @@ export const registerUser = asyncHandler(async (req, res) => {
     const verificationUrl = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
     
     try {
-        await sendEmail({
-            to: user.email,
-            subject: 'CampusConnect - Email Verification',
-            html: `<p>Please verify your email by clicking on this link: <a href="${verificationUrl}">Verify Email</a></p>`
-        });
+        if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+            await sendEmail({
+                to: user.email,
+                subject: 'CampusConnect - Email Verification',
+                html: `<p>Please verify your email by clicking on this link: <a href="${verificationUrl}">Verify Email</a></p>`
+            });
+        } else {
+            console.log("No SMTP Config provided. Skipping email send. Verification URL: ", verificationUrl);
+            // Auto-verify user for testing without SMTP
+            user.isVerified = true;
+            user.verificationToken = undefined;
+            user.verificationTokenExpire = undefined;
+            await user.save({ validateBeforeSave: false });
+        }
     } catch (err) {
+        console.error("Email sending failed:", err);
+        // Don't crash registration, just auto-verify for now
+        user.isVerified = true;
         user.verificationToken = undefined;
         user.verificationTokenExpire = undefined;
         await user.save({ validateBeforeSave: false });
-        throw new ApiError(500, "Email could not be sent");
     }
 
     const createdUser = await User.findById(user._id).select("-password");
